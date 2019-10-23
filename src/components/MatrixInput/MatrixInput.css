@@ -1,3 +1,10 @@
-.adj-matrix-cell {
+.edge-input {
   width: 50px;
+}
+
+.adj-label {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  margin: 0;
 }

@@ -2,60 +2,49 @@ import React, {useState} from 'react';
 import './MatrixInput.css';
 
 const MatrixInput = props => {
-  /*let [vertexCount, handleVertexCount] = useState(0);
+  let [vertexes, handleVertexes] = useState('');
 
-  const NumVertexCount = parseInt(vertexCount);
-  const MatrixTable = [];
-  for (let i = 0; i < NumVertexCount; i++) {
-    MatrixTable.push([]);
-    for (let j = 0; j < NumVertexCount; j++) {
-      MatrixTable[i].push(<input type={number} value />);
-    }
-  }*/
+  let {nodes, edges} = props.matrix;
 
-  let [vertexCount, handleVertexCount] = useState('0');
-
-  let {matrix} = props;
-
-  const onChangeVertexCount = e => {
+  const onChangeVertexes = e => {
     let newValue = e.target.value;
-    handleVertexCount(newValue);
-    props.ChangeVertexCount(parseInt(newValue));
+    handleVertexes(newValue);
+    props.ChangeVertexes(newValue.split(' '));
   };
 
   const onChangeMatrix = e => {
     props.ChangeAdjacency({
-      i: parseInt(e.target.dataset.i),
-      j: parseInt(e.target.dataset.j),
-      value: e.target.value
+      from: e.target.dataset.node,
+      to: e.target.value.split(' ')
     });
   };
 
-  let matrixCells = matrix.map((arr, i) => (
-    <div className="row" key={i}>
-      {arr.map((item, j) => (
+  let matrixCells = nodes.map((node, i) => {
+    let nodeEdges = edges.filter(edge => edge.from === node);
+    nodeEdges = nodeEdges.map(edge => edge.to);
+    return (
+      <div className="row" key={i}>
+        <label>From: '{node}' to: </label>
         <input
-          className="adj-matrix-cell"
-          key={i + ';' + j}
-          type="number"
-          value={item}
-          data-i={i}
-          data-j={j}
+          type="text"
+          className="edge-input"
+          value={nodeEdges.join(' ')}
           onChange={onChangeMatrix}
-        ></input>
-      ))}
-    </div>
-  ));
+          data-node={node}
+        />
+      </div>
+    );
+  });
 
   return (
     <div>
       <div>
-        <label>Количество вершин:</label>
+        <label>Вершины:</label>
         <input
-          type="number"
+          type="text"
           required
-          value={vertexCount}
-          onChange={onChangeVertexCount}
+          value={vertexes}
+          onChange={onChangeVertexes}
         ></input>
       </div>
       Матрица смежности:

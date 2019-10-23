@@ -6,7 +6,7 @@ const GraphDrawing = ({matrix}) => {
     edges: {
       color: '#000000',
       smooth: {enabled: true, type: 'dynamic'},
-      length: 150
+      length: 200
     },
     nodes: {
       color: '#888f99'

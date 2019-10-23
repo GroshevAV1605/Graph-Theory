@@ -12,7 +12,7 @@ const Lab2 = props => {
           <MatrixInput
             matrix={props.state.FirstAdjMatrix}
             ChangeAdjacency={props.ChangeFirstAdjacency}
-            ChangeVertexCount={props.ChangeFirstVertexCount}
+            ChangeVertexes={props.ChangeFirstVertexes}
           />
         </div>
         <div>
@@ -20,12 +20,19 @@ const Lab2 = props => {
           <MatrixInput
             matrix={props.state.SecondAdjMatrix}
             ChangeAdjacency={props.ChangeSecondAdjacency}
-            ChangeVertexCount={props.ChangeSecondVertexCount}
+            ChangeVertexes={props.ChangeSecondVertexes}
           />
         </div>
       </div>
       <button onClick={() => props.showResult()}>Расчитать</button>
-      {!props.state.hideOutput ? <Lab2Result /> : ''}
+      {!props.state.hideOutput ? (
+        <Lab2Result
+          FirstGraph={props.state.FirstAdjMatrix}
+          SecondGraph={props.state.SecondAdjMatrix}
+        />
+      ) : (
+        ''
+      )}
     </div>
   );
 };

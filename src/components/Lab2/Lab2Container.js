@@ -5,8 +5,8 @@ import {
   showResult,
   ChangeFirstAdjacency,
   ChangeSecondAdjacency,
-  ChangeFirstVertexCount,
-  ChangeSecondVertexCount
+  ChangeFirstVertexes,
+  ChangeSecondVertexes
 } from '../../actions/Lab2Actions';
 
 const Lab2Container = props => {
@@ -16,8 +16,8 @@ const Lab2Container = props => {
       showResult={props.showResult}
       ChangeFirstAdjacency={props.ChangeFirstAdjacency}
       ChangeSecondAdjacency={props.ChangeSecondAdjacency}
-      ChangeFirstVertexCount={props.ChangeFirstVertexCount}
-      ChangeSecondVertexCount={props.ChangeSecondVertexCount}
+      ChangeFirstVertexes={props.ChangeFirstVertexes}
+      ChangeSecondVertexes={props.ChangeSecondVertexes}
     />
   );
 };
@@ -25,12 +25,12 @@ const Lab2Container = props => {
 const mapDispatchToProps = dispatch => {
   return {
     showResult: () => dispatch(showResult()),
-    ChangeFirstAdjacency: ({i, j, value}) =>
-      dispatch(ChangeFirstAdjacency({i, j, value})),
-    ChangeSecondAdjacency: ({i, j, value}) =>
-      dispatch(ChangeSecondAdjacency({i, j, value})),
-    ChangeFirstVertexCount: value => dispatch(ChangeFirstVertexCount(value)),
-    ChangeSecondVertexCount: value => dispatch(ChangeSecondVertexCount(value))
+    ChangeFirstAdjacency: ({from, to}) =>
+      dispatch(ChangeFirstAdjacency({from, to})),
+    ChangeSecondAdjacency: ({from, to}) =>
+      dispatch(ChangeSecondAdjacency({from, to})),
+    ChangeFirstVertexes: value => dispatch(ChangeFirstVertexes(value)),
+    ChangeSecondVertexes: value => dispatch(ChangeSecondVertexes(value))
   };
 };
 

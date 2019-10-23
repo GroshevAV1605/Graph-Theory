@@ -82,6 +82,7 @@ export const NodesDegrees = (matrix, isOrGraph) => {
       Degrees.push(
         <li key={'or+' + i}>{'Deg v' + i + '(+) = ' + inputDegree}</li>
       );
+
       sumDegrees.push(outputDegree + inputDegree);
     } else {
       let degree = matrix[i].reduce((sum, item) => sum + item, 0);
@@ -89,6 +90,12 @@ export const NodesDegrees = (matrix, isOrGraph) => {
       sumDegrees.push(degree);
     }
   }
+  if (isOrGraph) {
+    sumDegrees.forEach((item, i) => {
+      Degrees.push(<li key={'nor' + item}>{'Deg v' + i + ' = ' + item}</li>);
+    });
+  }
+
   let isolated = [];
   let leaf = [];
   sumDegrees.forEach((item, index) => {
@@ -103,8 +110,8 @@ export const NodesDegrees = (matrix, isOrGraph) => {
   return {Degrees, isolated, leaf};
 };
 
-export const CountC = matrix => {
-  let n = matrix.length;
+export const CountMatrixC = (matrix, deg) => {
+  let n = deg;
   let result = matrix.map(item => item.map(jtem => jtem));
   let matrixPow = matrix.map(item => item.map(jtem => jtem));
 
@@ -114,6 +121,16 @@ export const CountC = matrix => {
     n--;
   }
 
+  return result;
+};
+
+export const CountMatrixDegree = (matrix, deg) => {
+  let n = deg;
+  let result = matrix.map(item => item.map(jtem => jtem));
+  while (n > 1) {
+    result = MultiplyMatrix(result, matrix);
+    n--;
+  }
   return result;
 };
 
@@ -134,3 +151,23 @@ const MultiplyMatrix = (Amatrix, Bmatrix) => {
 
 const SumMatrix = (Amatrix, Bmatrix) =>
   Amatrix.map((item, i) => item.map((jtem, j) => jtem + Bmatrix[i][j]));
+
+export const GraphCharacteristics = matrix => {
+  let length = matrix.length;
+  let PsevdoGraph = false;
+  let MultiGraph = false;
+  for (let i = 0; i < length; i++) {
+    if (matrix[i][i]) {
+      PsevdoGraph = true;
+      break;
+    }
+    for (let j = 0; j < length; j++) {
+      if (matrix[i][j] > 1) {
+        MultiGraph = true;
+        break;
+      }
+    }
+  }
+
+  return {PsevdoGraph, MultiGraph};
+};

@@ -7,69 +7,74 @@ import {
 } from '../constants/actionTypes';
 
 let initialState = {
-  FirstAdjMatrix: [],
-  SecondAdjMatrix: [],
+  FirstAdjMatrix: {nodes: [], edges: []},
+  SecondAdjMatrix: {nodes: [], edges: []},
   hideOutput: true
 };
 
 export function lab2reducer(state = initialState, action) {
+  //action.payload = {from: num, to: []}
   switch (action.type) {
     case CHANGE_FIRST_ADJACENCY:
       return {
         ...state,
-        FirstAdjMatrix: state.FirstAdjMatrix.map((item, i) =>
-          item.map((jtem, j) => {
-            return action.payload.j === j && action.payload.i === i
-              ? action.payload.value
-              : jtem;
-          })
-        )
+        hideOutput: true,
+        FirstAdjMatrix: {
+          nodes: state.FirstAdjMatrix.nodes,
+          edges: state.FirstAdjMatrix.edges
+            .filter(edge => edge.from !== action.payload.from)
+            .concat(
+              action.payload.to.map(item => {
+                return {from: action.payload.from, to: item};
+              })
+            )
+        }
       };
 
     case CHANGE_SECOND_ADJACENCY:
       return {
         ...state,
-        SecondAdjMatrix: state.SecondAdjMatrix.map((item, i) =>
-          item.map((jtem, j) => {
-            return action.payload.j === j && action.payload.i === i
-              ? action.payload.value
-              : jtem;
-          })
-        )
+        hideOutput: true,
+        SecondAdjMatrix: {
+          nodes: state.SecondAdjMatrix.nodes,
+          edges: state.SecondAdjMatrix.edges
+            .filter(edge => edge.from !== action.payload.from)
+            .concat(
+              action.payload.to.map(item => {
+                return {from: action.payload.from, to: item};
+              })
+            )
+        }
       };
 
     case CHANGE_FIRST_VERTEX_COUNT:
-      let newFirstMatrix = state.FirstAdjMatrix.map(arr => arr.slice());
-
-      while (newFirstMatrix.length < action.payload) {
-        newFirstMatrix.push(new Array(action.payload).fill(''));
-      }
-
-      newFirstMatrix.length = action.payload || 0;
-      newFirstMatrix = newFirstMatrix.map(arr => arr.slice(0, action.payload));
-
       return {
         ...state,
         hideOutput: true,
-        FirstAdjMatrix: newFirstMatrix
+        FirstAdjMatrix: {
+          nodes: action.payload,
+          edges: state.FirstAdjMatrix.edges.filter(edge => {
+            return (
+              action.payload.includes(edge.from) &&
+              action.payload.includes(edge.to)
+            );
+          })
+        }
       };
 
     case CHANGE_SECOND_VERTEX_COUNT:
-      let newSecondMatrix = state.SecondAdjMatrix.map(arr => arr.slice());
-
-      while (newSecondMatrix.length < action.payload) {
-        newSecondMatrix.push(new Array(action.payload).fill(''));
-      }
-
-      newSecondMatrix.length = action.payload || 0;
-      newSecondMatrix = newSecondMatrix.map(arr =>
-        arr.slice(0, action.payload)
-      );
-
       return {
         ...state,
         hideOutput: true,
-        SecondAdjMatrix: newSecondMatrix
+        SecondAdjMatrix: {
+          nodes: action.payload,
+          edges: state.SecondAdjMatrix.edges.filter(edge => {
+            return (
+              action.payload.includes(edge.from) &&
+              action.payload.includes(edge.to)
+            );
+          })
+        }
       };
 
     case SHOW_RESULT:

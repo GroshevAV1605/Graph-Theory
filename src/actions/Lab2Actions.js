@@ -14,11 +14,11 @@ export function ChangeSecondAdjacency(payload) {
   return {type: CHANGE_SECOND_ADJACENCY, payload};
 }
 
-export function ChangeFirstVertexCount(payload) {
+export function ChangeFirstVertexes(payload) {
   return {type: CHANGE_FIRST_VERTEX_COUNT, payload};
 }
 
-export function ChangeSecondVertexCount(payload) {
+export function ChangeSecondVertexes(payload) {
   return {type: CHANGE_SECOND_VERTEX_COUNT, payload};
 }
 
