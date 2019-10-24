@@ -1,3 +1,15 @@
+export const MatrixUnion = (Amatrix, Bmatrix) =>
+  GraphToMatrix(GraphUnion(Amatrix, Bmatrix));
+
+export const MatrixIntersection = (Amatrix, Bmatrix) =>
+  GraphToMatrix(GraphIntersection(Amatrix, Bmatrix));
+
+export const MatrixCompound = (Amatrix, Bmatrix) =>
+  GraphToMatrix(GraphCompound(Amatrix, Bmatrix));
+
+export const MatrixRingAmount = (Amatrix, Bmatrix) =>
+  GraphToMatrix(GraphRingAmount(Amatrix, Bmatrix));
+
 const GraphToMatrix = ({nodes, edges}) => {
   let adj = new Array(nodes.length).fill([]);
   adj = adj.map(arr => new Array(nodes.length).fill(0));
@@ -9,7 +21,7 @@ const GraphToMatrix = ({nodes, edges}) => {
   return adj;
 };
 
-export const MatrixUnion = (Amatrix, Bmatrix) => {
+const GraphUnion = (Amatrix, Bmatrix) => {
   let nodes = [...Amatrix.nodes, ...Bmatrix.nodes];
   nodes = nodes.filter((item, pos) => nodes.indexOf(item) === pos);
 
@@ -28,21 +40,53 @@ export const MatrixUnion = (Amatrix, Bmatrix) => {
       edges.push(Bmatrix.edges[i]);
     }
   }
-
-  return GraphToMatrix({nodes, edges});
+  return {nodes, edges};
 };
 
-export const MatrixIntersection = (Amatrix, Bmatrix) => {};
-
-export const MatrixCompound = (Amatrix, Bmatrix) => {
-  if (Bmatrix.length > Amatrix.length) {
-    [Amatrix, Bmatrix] = [Bmatrix, Amatrix];
-  }
-
-  let union = MatrixUnion(Amatrix, Bmatrix);
-  for (let i = Bmatrix.length - 1; i < Amatrix.length; i++) {
-    for (let j = 0; j < Bmatrix.length; j++) {
-      union[i][j] = '1';
+const GraphIntersection = (Amatrix, Bmatrix) => {
+  let nodes = Amatrix.nodes.filter(node => Bmatrix.nodes.includes(node));
+  let edges = Amatrix.edges.filter(edge => {
+    for (let i = 0; i < Bmatrix.edges.length; i++) {
+      if (
+        edge.from === Bmatrix.edges[i].from &&
+        edge.to === Bmatrix.edges[i].to
+      ) {
+        return true;
+      }
     }
-  }
+    return false;
+  });
+  return {nodes, edges};
+};
+
+const GraphCompound = (Amatrix, Bmatrix) => {
+  let union = GraphUnion(Amatrix, Bmatrix);
+  Amatrix.nodes.forEach((Anode, i) => {
+    Bmatrix.nodes.forEach((Bnode, j) => {
+      if (Anode === Bnode) {
+        return;
+      }
+      if (!union.edges.some(edge => edge.from === Anode && edge.to === Bnode)) {
+        union.edges.push({from: Anode, to: Bnode});
+      }
+      if (!union.edges.some(edge => edge.from === Bnode && edge.to === Anode)) {
+        union.edges.push({from: Bnode, to: Anode});
+      }
+    });
+  });
+
+  return union;
+};
+
+const GraphRingAmount = (Amatrix, Bmatrix) => {
+  let union = GraphUnion(Amatrix, Bmatrix);
+  let {edges} = GraphIntersection(Amatrix, Bmatrix);
+
+  union.edges = union.edges.filter(Uedge => {
+    return !edges.some(
+      edge => edge.from === Uedge.from && edge.to === Uedge.to
+    );
+  });
+
+  return union;
 };
