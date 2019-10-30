@@ -10,15 +10,18 @@ export const MatrixCompound = (Amatrix, Bmatrix) =>
 export const MatrixRingAmount = (Amatrix, Bmatrix) =>
   GraphToMatrix(GraphRingAmount(Amatrix, Bmatrix));
 
+export const MatrixCartesian = (Amatrix, Bmatrix) =>
+  GraphToMatrix(GraphCartesianProduct(Amatrix, Bmatrix));
+
 const GraphToMatrix = ({nodes, edges}) => {
-  let adj = new Array(nodes.length).fill([]);
-  adj = adj.map(arr => new Array(nodes.length).fill(0));
+  let adjMatrix = new Array(nodes.length).fill([]);
+  adjMatrix = adjMatrix.map(arr => new Array(nodes.length).fill(0));
 
   edges.forEach(item => {
-    adj[nodes.indexOf(item.from)][nodes.indexOf(item.to)] += 1;
+    adjMatrix[nodes.indexOf(item.from)][nodes.indexOf(item.to)] += 1;
   });
 
-  return adj;
+  return {adjMatrix, nodes};
 };
 
 const GraphUnion = (Amatrix, Bmatrix) => {
@@ -89,4 +92,35 @@ const GraphRingAmount = (Amatrix, Bmatrix) => {
   });
 
   return union;
+};
+
+const GraphCartesianProduct = (Amatrix, Bmatrix) => {
+  let nodes = Amatrix.nodes.reduce(
+    (sum, Anode) => sum.concat(Bmatrix.nodes.map(Bnode => Anode + Bnode)),
+    []
+  );
+  let edges = [];
+
+  nodes.forEach(Fnode =>
+    nodes.forEach(Snode => {
+      let [u, uT] = Fnode.split('');
+      let [v, vT] = Snode.split('');
+      if ((u === v) & (uT === vT)) return;
+      if (
+        (u === v) &
+        Bmatrix.edges.some(edge => (edge.from === uT) & (edge.to === vT))
+      ) {
+        edges.push({from: Fnode, to: Snode});
+      }
+
+      if (
+        (uT === vT) &
+        Amatrix.edges.some(edge => (edge.from === u) & (edge.to === v))
+      ) {
+        edges.push({from: Fnode, to: Snode});
+      }
+    })
+  );
+
+  return {nodes, edges};
 };

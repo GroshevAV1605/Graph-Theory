@@ -2,3 +2,11 @@
   display: flex;
   justify-content: space-around;
 }
+
+.operation-container {
+  display: flex;
+}
+
+.operation-container div {
+  width: 40%;
+}

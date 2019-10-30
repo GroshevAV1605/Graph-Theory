@@ -1,12 +1,12 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 
-const GraphDrawing = ({matrix}) => {
+const GraphDrawing = ({matrix, length}) => {
   let options = {
     edges: {
       color: '#000000',
       smooth: {enabled: true, type: 'dynamic'},
-      length: 200
+      length: length || 200
     },
     nodes: {
       color: '#888f99'
@@ -31,7 +31,7 @@ const GraphDrawing = ({matrix}) => {
   }
 
   return (
-    <div id="graph" style={{height: '40vh'}}>
+    <div id="graph">
       <Graph graph={graph} options={options} />
     </div>
   );
