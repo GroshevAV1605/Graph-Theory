@@ -10,9 +10,9 @@ const Matrix = props => {
         <tbody>
           {nodes ? (
             <tr>
-              <td className={styles.td_node}></td>
+              <td className={styles.tdNode}></td>
               {nodes.map((item, i) => (
-                <td key={i} className={styles.td_node}>
+                <td key={i} className={styles.tdNode}>
                   {item}
                 </td>
               ))}
@@ -22,7 +22,7 @@ const Matrix = props => {
           )}
           {matrix.map((item, i) => (
             <tr key={i}>
-              {nodes ? <td className={styles.td_node}>{nodes[i]}</td> : ''}
+              {nodes ? <td className={styles.tdNode}>{nodes[i]}</td> : ''}
               {item.map((item, i) => (
                 <td key={i}>{item}</td>
               ))}

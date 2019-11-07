@@ -1,11 +1,11 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 
-const GraphDrawing = ({matrix, length}) => {
+const GraphDrawing = ({matrix, length, nodes, isOrgraph = true}) => {
   let options = {
     edges: {
       color: '#000000',
-      smooth: {enabled: true, type: 'dynamic'},
+      smooth: {enabled: isOrgraph, type: 'dynamic'},
       length: length || 200
     },
     nodes: {
@@ -18,7 +18,9 @@ const GraphDrawing = ({matrix, length}) => {
   };
 
   let graph = {
-    nodes: [...Array(matrix.length).keys()].map(i => ({id: i, label: 'x' + i})),
+    nodes: nodes
+      ? nodes.map((i, index) => ({id: index, label: i}))
+      : [...Array(matrix.length).keys()].map(i => ({id: i, label: 'x' + i})),
     edges: []
   };
 
@@ -31,7 +33,7 @@ const GraphDrawing = ({matrix, length}) => {
   }
 
   return (
-    <div id="graph">
+    <div id="graph" style={{height: '40vh'}}>
       <Graph graph={graph} options={options} />
     </div>
   );

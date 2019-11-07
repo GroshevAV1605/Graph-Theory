@@ -1,12 +1,12 @@
-.input-container {
+.inputContainer {
   display: flex;
   justify-content: space-around;
 }
 
-.operation-container {
+.operationContainer {
   display: flex;
 }
 
-.operation-container div {
+.operationContainer div {
   width: 40%;
 }

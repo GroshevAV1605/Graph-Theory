@@ -13,7 +13,7 @@ export const MatrixRingAmount = (Amatrix, Bmatrix) =>
 export const MatrixCartesian = (Amatrix, Bmatrix) =>
   GraphToMatrix(GraphCartesianProduct(Amatrix, Bmatrix));
 
-const GraphToMatrix = ({nodes, edges}) => {
+export const GraphToMatrix = ({nodes, edges}) => {
   let adjMatrix = new Array(nodes.length).fill([]);
   adjMatrix = adjMatrix.map(arr => new Array(nodes.length).fill(0));
 

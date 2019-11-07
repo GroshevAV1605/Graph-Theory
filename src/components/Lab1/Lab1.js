@@ -1,11 +1,11 @@
 import React from 'react';
 import AdjListInput from '../AdjListInput';
 import Lab1Result from './Lab1Result';
-import './Lab1.css';
 
 const Lab1 = props => {
   return (
     <div className="container">
+      <h2>Основные понятия, определения и способы задания графов</h2>
       <AdjListInput
         state={props.state}
         ChangeAdjacency={props.ChangeAdjacency}

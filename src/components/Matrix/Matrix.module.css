@@ -1,5 +1,7 @@
 .matrix {
   position: relative;
+  margin-left: 30px;
+  margin-right: 30px;
 }
 .matrix:before,
 .matrix:after {
@@ -24,7 +26,7 @@ td {
   padding-right: 5px;
 }
 
-.td_node {
+.tdNode {
   color: grey;
   font-size: 9px;
   height: 9px;

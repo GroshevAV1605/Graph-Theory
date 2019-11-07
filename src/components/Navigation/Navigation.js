@@ -6,7 +6,7 @@ export default function Navigation() {
     <ul className="nav-list">
       <li className="nav-item">
         <Link to="/lab1" className="nav-link">
-          Lab1
+          Характеристика графов
         </Link>
       </li>
       <li className="nav-item">
@@ -14,7 +14,16 @@ export default function Navigation() {
           Бинарные операции
         </Link>
       </li>
-      <li className="nav-item">Lab 3</li>
+      <li className="nav-item">
+        <Link to="/lab3" className="nav-link">
+          Алгоритм фронта волны
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/lab4" className="nav-link">
+          Компоненты связности
+        </Link>
+      </li>
     </ul>
   );
 }

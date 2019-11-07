@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import './MatrixInput.css';
+import styles from './MatrixInput.module.css';
 
 const MatrixInput = props => {
   let [vertexes, handleVertexes] = useState('');
@@ -27,7 +27,7 @@ const MatrixInput = props => {
         <label>From: '{node}' to: </label>
         <input
           type="text"
-          className="edge-input"
+          className={styles.edgeInput}
           value={nodeEdges.join(' ')}
           onChange={onChangeMatrix}
           data-node={node}

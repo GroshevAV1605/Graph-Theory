@@ -1,0 +1,16 @@
+.flexContainer {
+  display: flex;
+}
+
+.characteristicContainer {
+  margin-top: 40px;
+}
+
+.pathInput {
+  width: 30px;
+}
+
+.findPathContainer {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}

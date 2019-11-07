@@ -3,7 +3,7 @@ import {
   CHANGE_SECOND_ADJACENCY,
   CHANGE_FIRST_VERTEX_COUNT,
   CHANGE_SECOND_VERTEX_COUNT,
-  SHOW_RESULT
+  SHOW_RESULT_L2
 } from '../constants/actionTypes';
 
 let initialState = {
@@ -77,7 +77,7 @@ export function lab2reducer(state = initialState, action) {
         }
       };
 
-    case SHOW_RESULT:
+    case SHOW_RESULT_L2:
       return {
         ...state,
         hideOutput: false

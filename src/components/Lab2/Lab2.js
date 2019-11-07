@@ -1,12 +1,13 @@
 import React from 'react';
 import MatrixInput from '../MatrixInput';
 import Lab2Result from './Lab2Result';
-import './Lab2.css';
+import styles from './Lab2.module.css';
 
 const Lab2 = props => {
   return (
     <div>
-      <div className="input-container">
+      <h2>Бинарные операции над графами</h2>
+      <div className={styles.inputContainer}>
         <div>
           <h4>Матрица G1</h4>
           <MatrixInput

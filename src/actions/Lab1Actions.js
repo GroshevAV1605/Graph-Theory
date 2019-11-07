@@ -1,17 +1,17 @@
 import {
-    CHANGE_ADJACENCY,
-    CHANGE_VERTEX_COUNT,
-    SHOW_RESULT
-} from "../constants/actionTypes";
+  CHANGE_ADJACENCY,
+  CHANGE_VERTEX_COUNT,
+  SHOW_RESULT_L1
+} from '../constants/actionTypes';
 
 export function ChangeAdjacency(payload) {
-    return { type: CHANGE_ADJACENCY, payload };
+  return {type: CHANGE_ADJACENCY, payload};
 }
 
 export function ChangeVertexCount(payload) {
-    return { type: CHANGE_VERTEX_COUNT, payload };
+  return {type: CHANGE_VERTEX_COUNT, payload};
 }
 
 export function showResult() {
-    return { type: SHOW_RESULT };
+  return {type: SHOW_RESULT_L1};
 }

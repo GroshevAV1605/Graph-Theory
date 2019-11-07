@@ -3,7 +3,7 @@ import {
   CHANGE_SECOND_ADJACENCY,
   CHANGE_FIRST_VERTEX_COUNT,
   CHANGE_SECOND_VERTEX_COUNT,
-  SHOW_RESULT
+  SHOW_RESULT_L2
 } from '../constants/actionTypes';
 
 export function ChangeFirstAdjacency(payload) {
@@ -23,5 +23,5 @@ export function ChangeSecondVertexes(payload) {
 }
 
 export function showResult() {
-  return {type: SHOW_RESULT};
+  return {type: SHOW_RESULT_L2};
 }
