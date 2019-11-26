@@ -24,6 +24,11 @@ export default function Navigation() {
           Компоненты связности
         </Link>
       </li>
+      <li className="nav-item">
+        <Link to="/lab5" className="nav-link">
+          Алгоритм Флойда-Уоршелла
+        </Link>
+      </li>
     </ul>
   );
 }

@@ -1,0 +1,17 @@
+.matrixesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.matrix {
+  margin: 10px;
+}
+
+.graphContainer {
+  height: 700px;
+}
+.adjCompContainer {
+  display: flex;
+  justify-content: flex-start;
+}

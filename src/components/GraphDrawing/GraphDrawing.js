@@ -1,12 +1,12 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 
-const GraphDrawing = ({matrix, length, nodes, isOrgraph = true}) => {
+const GraphDrawing = ({matrix, nodes, length = 200, isOrgraph = true}) => {
   let options = {
     edges: {
       color: '#000000',
       smooth: {enabled: isOrgraph, type: 'dynamic'},
-      length: length || 200
+      length
     },
     nodes: {
       color: '#888f99'

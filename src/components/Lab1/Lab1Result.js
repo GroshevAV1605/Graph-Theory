@@ -60,13 +60,15 @@ const Lab1Result = props => {
         <p>Изолированные вершины: {isolated}</p>
         {!props.isOrGraph && <p>Висячие вершины: {leaf}</p>}
       </div>
-      <div>
-        <h4>С матрица(n-1):</h4>
-        <Matrix matrix={Cmatrix} />
-      </div>
-      <div>
-        <h4>С матрица(n):</h4>
-        <Matrix matrix={Cmatrix2} />
+      <div style={{display: 'flex'}}>
+        <div>
+          <h4>С матрица(n-1):</h4>
+          <Matrix matrix={Cmatrix} />
+        </div>
+        <div>
+          <h4>С матрица(n):</h4>
+          <Matrix matrix={Cmatrix2} />
+        </div>
       </div>
       <div>
         <h4>Количество маршрутов заданной длины:</h4>

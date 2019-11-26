@@ -6,6 +6,7 @@ import {Route} from 'react-router-dom';
 import Lab1Container from '../Lab1/Lab1Container';
 import Lab2Container from '../Lab2/Lab2Container';
 import Lab3Container from '../Lab3/Lab3Container';
+import Lab4Container from '../Lab4/Lab4Container';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/lab1" component={Lab1Container} />
           <Route path="/lab2" component={Lab2Container} />
           <Route path="/lab3" component={Lab3Container} />
+          <Route path="/lab4" component={Lab4Container} />
         </div>
       </div>
     </div>

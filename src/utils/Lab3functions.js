@@ -4,6 +4,7 @@ export const DistanceMatrix = graph => {
   let matrix = GraphToMatrix(graph);
   let Dmatrix = matrix.adjMatrix.map((item, i) => bfs(matrix.adjMatrix, i)[0]);
   console.log(Dmatrix);
+  console.log(matrix.adjMatrix);
   return {Dmatrix, nodes: matrix.nodes};
 };
 

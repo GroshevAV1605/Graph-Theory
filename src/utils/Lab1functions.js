@@ -134,7 +134,7 @@ export const CountMatrixDegree = (matrix, deg) => {
   return result;
 };
 
-const MultiplyMatrix = (Amatrix, Bmatrix) => {
+export const MultiplyMatrix = (Amatrix, Bmatrix) => {
   let result = [];
 
   for (let i = 0; i < Amatrix.length; i++) {
