@@ -1,5 +1,5 @@
 import React from 'react';
-import MatrixInput from '../MatrixInput/MatrixInput';
+import MatrixInput from '../MatrixInput';
 import Lab4Result from './Lab4Result';
 
 const Lab4 = props => {
@@ -14,7 +14,7 @@ const Lab4 = props => {
           ChangeVertexes={props.ChangeVertexes}
         />
       </div>
-      <button onClick={() => props.showResult()}>Расчитать</button>
+      <button onClick={() => props.showResult(false)}>Расчитать</button>
       {!props.state.hideOutput ? (
         <Lab4Result graph={props.state.AdjMatrix} />
       ) : (

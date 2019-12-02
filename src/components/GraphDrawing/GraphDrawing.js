@@ -1,7 +1,7 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 
-const GraphDrawing = ({matrix, nodes, length = 200, isOrgraph = true}) => {
+const GraphDrawing = ({matrix, nodes, length, isOrgraph}) => {
   let options = {
     edges: {
       color: '#000000',
@@ -33,10 +33,15 @@ const GraphDrawing = ({matrix, nodes, length = 200, isOrgraph = true}) => {
   }
 
   return (
-    <div id="graph" style={{height: '40vh'}}>
+    <div id="graph" style={{height: '45vh'}}>
       <Graph graph={graph} options={options} />
     </div>
   );
+};
+
+GraphDrawing.defaultProps = {
+  length: 200,
+  isOrgraph: true
 };
 
 export default GraphDrawing;

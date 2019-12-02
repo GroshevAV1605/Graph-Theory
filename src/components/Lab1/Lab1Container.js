@@ -1,39 +1,37 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {
-  showResult,
-  ChangeAdjacency,
-  ChangeVertexCount
-} from '../../actions/Lab1Actions';
+import React, {useState} from 'react';
 import Lab1 from './Lab1';
 
 const Lab1Conainer = props => {
+  const [hideOutput, showResult] = useState(true);
+  const [adjacencyList, ChangeList] = useState(['', '']);
+
+  const ChangeAdjacency = (Sindex, value) => {
+    ChangeList(
+      adjacencyList.map((item, index) => {
+        return index === Sindex ? value : item;
+      })
+    );
+    showResult(true);
+  };
+
+  const ChangeVertexCount = len => {
+    let newAdjList = [...adjacencyList];
+    while (newAdjList.length < len) {
+      newAdjList.push('');
+    }
+    newAdjList.length = len || 0;
+    ChangeList(newAdjList);
+    showResult(true);
+  };
+
   return (
     <Lab1
-      state={props.state}
-      showResult={props.showResult}
-      ChangeAdjacency={props.ChangeAdjacency}
-      ChangeVertexCount={props.ChangeVertexCount}
+      state={{hideOutput, adjacencyList}}
+      showResult={showResult}
+      ChangeAdjacency={ChangeAdjacency}
+      ChangeVertexCount={ChangeVertexCount}
     />
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    showResult: () => dispatch(showResult()),
-    ChangeAdjacency: (index, value) =>
-      dispatch(ChangeAdjacency({index, value})),
-    ChangeVertexCount: value => dispatch(ChangeVertexCount(value))
-  };
-};
-
-const mapStateToProps = store => {
-  return {
-    state: store.lab1
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Lab1Conainer);
+export default Lab1Conainer;

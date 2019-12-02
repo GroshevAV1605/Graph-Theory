@@ -1,46 +1,72 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Lab2 from './Lab2';
-import {connect} from 'react-redux';
-import {
-  showResult,
-  ChangeFirstAdjacency,
-  ChangeSecondAdjacency,
-  ChangeFirstVertexes,
-  ChangeSecondVertexes
-} from '../../actions/Lab2Actions';
 
 const Lab2Container = props => {
+  const [hideOutput, showResult] = useState(true);
+  const [FirstAdjMatrix, changeFirstMatrix] = useState({nodes: [], edges: []});
+  const [SecondAdjMatrix, changeSecondMatrix] = useState({
+    nodes: [],
+    edges: []
+  });
+
+  const ChangeFirstAdjacency = node => {
+    changeFirstMatrix({
+      nodes: FirstAdjMatrix.nodes,
+      edges: FirstAdjMatrix.edges
+        .filter(edge => edge.from !== node.from)
+        .concat(
+          node.to.map(item => {
+            return {from: node.from, to: item};
+          })
+        )
+    });
+    showResult(true);
+  };
+
+  const ChangeSecondAdjacency = node => {
+    changeSecondMatrix({
+      nodes: SecondAdjMatrix.nodes,
+      edges: SecondAdjMatrix.edges
+        .filter(edge => edge.from !== node.from)
+        .concat(
+          node.to.map(item => {
+            return {from: node.from, to: item};
+          })
+        )
+    });
+    showResult(true);
+  };
+
+  const ChangeFirstVertexes = nodes => {
+    showResult(true);
+    changeFirstMatrix({
+      nodes,
+      edges: FirstAdjMatrix.edges.filter(edge => {
+        return nodes.includes(edge.from) && nodes.includes(edge.to);
+      })
+    });
+  };
+
+  const ChangeSecondVertexes = nodes => {
+    showResult(true);
+    changeSecondMatrix({
+      nodes,
+      edges: SecondAdjMatrix.edges.filter(edge => {
+        return nodes.includes(edge.from) && nodes.includes(edge.to);
+      })
+    });
+  };
+
   return (
     <Lab2
-      state={props.state}
-      showResult={props.showResult}
-      ChangeFirstAdjacency={props.ChangeFirstAdjacency}
-      ChangeSecondAdjacency={props.ChangeSecondAdjacency}
-      ChangeFirstVertexes={props.ChangeFirstVertexes}
-      ChangeSecondVertexes={props.ChangeSecondVertexes}
+      state={{hideOutput, FirstAdjMatrix, SecondAdjMatrix}}
+      showResult={showResult}
+      ChangeFirstAdjacency={ChangeFirstAdjacency}
+      ChangeSecondAdjacency={ChangeSecondAdjacency}
+      ChangeFirstVertexes={ChangeFirstVertexes}
+      ChangeSecondVertexes={ChangeSecondVertexes}
     />
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    showResult: () => dispatch(showResult()),
-    ChangeFirstAdjacency: ({from, to}) =>
-      dispatch(ChangeFirstAdjacency({from, to})),
-    ChangeSecondAdjacency: ({from, to}) =>
-      dispatch(ChangeSecondAdjacency({from, to})),
-    ChangeFirstVertexes: value => dispatch(ChangeFirstVertexes(value)),
-    ChangeSecondVertexes: value => dispatch(ChangeSecondVertexes(value))
-  };
-};
-
-const mapStateToProps = store => {
-  return {
-    state: store.lab2
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Lab2Container);
+export default Lab2Container;

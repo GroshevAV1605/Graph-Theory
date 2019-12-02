@@ -21,7 +21,7 @@ export const IncMatrixFromList = (graph, isOrgraph = true) => {
 
 export const ReachabilityMatrix = matrix => {
   let Cmatrix = CountMatrixC(matrix, matrix.length - 1);
-  return Cmatrix.map((arr, i) => arr.map((el, j) => (el || i == j ? 1 : 0)));
+  return Cmatrix.map((arr, i) => arr.map((el, j) => (el || i === j ? 1 : 0)));
 };
 
 export const StrConnMatrix = matrix => {

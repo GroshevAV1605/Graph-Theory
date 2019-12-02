@@ -8,9 +8,6 @@
   margin: 10px;
 }
 
-.graphContainer {
-  height: 700px;
-}
 .adjCompContainer {
   display: flex;
   justify-content: flex-start;

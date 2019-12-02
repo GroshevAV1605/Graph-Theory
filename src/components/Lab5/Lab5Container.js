@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
-import Lab3 from './Lab3';
+import Lab5 from './Lab5';
 
-const Lab3Container = () => {
+const Lab5Container = () => {
   const [hideOutput, showResult] = useState(true);
   const [AdjMatrix, changeMatrix] = useState({nodes: [], edges: []});
-
   const ChangeAdjacency = node => {
     changeMatrix({
       nodes: AdjMatrix.nodes,
@@ -12,7 +11,8 @@ const Lab3Container = () => {
         .filter(edge => edge.from !== node.from)
         .concat(
           node.to.map(item => {
-            return {from: node.from, to: item};
+            let [toF, weight = 1] = item.split(':');
+            return {from: node.from, to: toF, weight};
           })
         )
     });
@@ -28,9 +28,8 @@ const Lab3Container = () => {
       })
     });
   };
-
   return (
-    <Lab3
+    <Lab5
       state={{hideOutput, AdjMatrix}}
       showResult={showResult}
       ChangeAdjacency={ChangeAdjacency}
@@ -39,4 +38,4 @@ const Lab3Container = () => {
   );
 };
 
-export default Lab3Container;
+export default Lab5Container;

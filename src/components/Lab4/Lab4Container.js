@@ -1,35 +1,42 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React, {useState} from 'react';
 import Lab4 from './Lab4';
-import {
-  showResult,
-  ChangeAdjacency,
-  ChangeVertexes
-} from '../../actions/Lab4Actions';
 
 const Lab4Container = props => {
+  const [hideOutput, showResult] = useState(true);
+  const [AdjMatrix, changeMatrix] = useState({nodes: [], edges: []});
+
+  const ChangeAdjacency = node => {
+    changeMatrix({
+      nodes: AdjMatrix.nodes,
+      edges: AdjMatrix.edges
+        .filter(edge => edge.from !== node.from)
+        .concat(
+          node.to.map(item => {
+            return {from: node.from, to: item};
+          })
+        )
+    });
+    showResult(true);
+  };
+
+  const ChangeVertexes = nodes => {
+    showResult(true);
+    changeMatrix({
+      nodes,
+      edges: AdjMatrix.edges.filter(edge => {
+        return nodes.includes(edge.from) && nodes.includes(edge.to);
+      })
+    });
+  };
+
   return (
     <Lab4
-      state={props.state}
-      showResult={props.showResult}
-      ChangeAdjacency={props.ChangeAdjacency}
-      ChangeVertexes={props.ChangeVertexes}
+      state={{hideOutput, AdjMatrix}}
+      showResult={showResult}
+      ChangeAdjacency={ChangeAdjacency}
+      ChangeVertexes={ChangeVertexes}
     />
   );
 };
 
-const mapStateToProps = store => {
-  return {
-    state: store.lab4
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    showResult: () => dispatch(showResult()),
-    ChangeAdjacency: ({from, to}) => dispatch(ChangeAdjacency({from, to})),
-    ChangeVertexes: value => dispatch(ChangeVertexes(value))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Lab4Container);
+export default Lab4Container;
