@@ -4,6 +4,7 @@ import Lab5 from './Lab5';
 const Lab5Container = () => {
   const [hideOutput, showResult] = useState(true);
   const [AdjMatrix, changeMatrix] = useState({nodes: [], edges: []});
+
   const ChangeAdjacency = node => {
     changeMatrix({
       nodes: AdjMatrix.nodes,
@@ -11,7 +12,7 @@ const Lab5Container = () => {
         .filter(edge => edge.from !== node.from)
         .concat(
           node.to.map(item => {
-            let [toF, weight = 1] = item.split(':');
+            let [toF, weight = ''] = item.split(':');
             return {from: node.from, to: toF, weight};
           })
         )

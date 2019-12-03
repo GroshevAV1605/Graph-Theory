@@ -15,11 +15,7 @@ const Lab4 = props => {
         />
       </div>
       <button onClick={() => props.showResult(false)}>Расчитать</button>
-      {!props.state.hideOutput ? (
-        <Lab4Result graph={props.state.AdjMatrix} />
-      ) : (
-        ''
-      )}
+      {!props.state.hideOutput && <Lab4Result graph={props.state.AdjMatrix} />}
     </div>
   );
 };

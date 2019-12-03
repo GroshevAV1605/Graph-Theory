@@ -21,7 +21,9 @@ const MatrixInput = props => {
 
   let matrixCells = nodes.map((node, i) => {
     let nodeEdges = edges.filter(edge => edge.from === node);
-    nodeEdges = nodeEdges.map(edge => edge.to);
+    nodeEdges = props.weighted
+      ? nodeEdges.map(edge => edge.to + (edge.to && ':' + edge.weight))
+      : nodeEdges.map(edge => edge.to);
     return (
       <div className="row" key={i}>
         <label>From: '{node}' to: </label>

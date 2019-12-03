@@ -1,7 +1,7 @@
 import React from 'react';
 import Graph from 'react-graph-vis';
 
-const GraphDrawing = ({matrix, nodes, length, isOrgraph}) => {
+const GraphDrawing = ({matrix, nodes, length, isOrgraph, isWeighted}) => {
   let options = {
     edges: {
       color: '#000000',
@@ -26,8 +26,14 @@ const GraphDrawing = ({matrix, nodes, length, isOrgraph}) => {
 
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix.length; j++) {
-      for (let k = 0; k < matrix[i][j]; k++) {
-        graph.edges.push({from: i, to: j});
+      if (isWeighted) {
+        matrix[i][j] &&
+          matrix[i][j] < Infinity &&
+          graph.edges.push({from: i, to: j, label: matrix[i][j]});
+      } else {
+        for (let k = 0; k < matrix[i][j]; k++) {
+          graph.edges.push({from: i, to: j});
+        }
       }
     }
   }
@@ -41,7 +47,8 @@ const GraphDrawing = ({matrix, nodes, length, isOrgraph}) => {
 
 GraphDrawing.defaultProps = {
   length: 200,
-  isOrgraph: true
+  isOrgraph: true,
+  isWeighted: false
 };
 
 export default GraphDrawing;
