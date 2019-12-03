@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 export default function Navigation() {
   return (
-    <ul className="nav-list">
+    <ol className="nav-list">
       <li className="nav-item">
         <Link to="/lab1" className="nav-link">
           Характеристика графов
@@ -29,6 +29,11 @@ export default function Navigation() {
           Алгоритм Флойда-Уоршелла
         </Link>
       </li>
-    </ul>
+      <li className="nav-item">
+        <Link to="/lab6" className="nav-link">
+          Эйлеровы графы
+        </Link>
+      </li>
+    </ol>
   );
 }

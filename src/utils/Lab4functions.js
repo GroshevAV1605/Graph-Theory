@@ -8,11 +8,17 @@ export const IncMatrixFromList = (graph, isOrgraph = true) => {
     graph.edges.forEach((edge, i) => {
       IncMatrix[graph.nodes.indexOf(edge.from)][i] = -1;
       IncMatrix[graph.nodes.indexOf(edge.to)][i] = 1;
+      if (edge.from === edge.to) {
+        IncMatrix[graph.nodes.indexOf(edge.from)][i] = 2;
+      }
     });
   } else {
     graph.edges.forEach((edge, i) => {
       IncMatrix[graph.nodes.indexOf(edge.from)][i] = 1;
       IncMatrix[graph.nodes.indexOf(edge.to)][i] = 1;
+      if (edge.from === edge.to) {
+        IncMatrix[graph.nodes.indexOf(edge.from)][i] = 2;
+      }
     });
   }
 
