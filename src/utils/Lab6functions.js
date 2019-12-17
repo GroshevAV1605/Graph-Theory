@@ -1,6 +1,6 @@
 export const isEuler = (adjMarix, isOrgraph) => {
   if (!isConn(adjMarix)) {
-    return false;
+    return 0;
   }
 
   let OddVertex = 0;
@@ -9,9 +9,9 @@ export const isEuler = (adjMarix, isOrgraph) => {
       OddVertex++;
     }
   });
-  if (OddVertex > 2) return false;
-
-  return true;
+  if (OddVertex > 2) return 0;
+  if (OddVertex == 0) return 2;
+  return 1;
 };
 
 export const isConn = adj => {

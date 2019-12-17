@@ -1,0 +1,8 @@
+.flexContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.flexContainer > div {
+  width: 50%;
+}

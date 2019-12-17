@@ -1,5 +1,6 @@
 import React from 'react';
 import {WeightGraphToMatrix, FloydWarshell} from '../../utils/Lab5functions';
+import {WeightedGrapToOutput} from '../../utils/Lab8functions';
 import Matrix from '../Matrix';
 import GraphDrawing from '../GraphDrawing';
 import styles from './Lab5.module.css';
@@ -7,12 +8,8 @@ import styles from './Lab5.module.css';
 const Lab5Result = ({graph}) => {
   let Dmatrix = WeightGraphToMatrix(graph);
   let weights = graph.edges.map(edge => edge.weight);
-  let DmatrixToOutput = Dmatrix.matrix.map(ar =>
-    ar.map(el => (el === Infinity ? '\u221e' : el))
-  );
-  let DmMatrix = FloydWarshell(Dmatrix.matrix).map(ar =>
-    ar.map(el => (el === Infinity ? '\u221e' : el))
-  );
+  let DmatrixToOutput = WeightedGrapToOutput(Dmatrix.matrix);
+  let DmMatrix = WeightedGrapToOutput(FloydWarshell(Dmatrix.matrix));
 
   console.log(weights);
   return (

@@ -9,6 +9,9 @@ import Lab3Container from '../Lab3/Lab3Container';
 import Lab4Container from '../Lab4/Lab4Container';
 import Lab5Container from '../Lab5/Lab5Container';
 import Lab6Container from '../Lab6/Lab6Container';
+import Lab7Container from '../Lab7/Lab7Container';
+import Lab8Container from '../Lab8/Lab8Container';
+import Lab9Container from '../Lab9/Lab9Container';
 
 function App() {
   return (
@@ -25,6 +28,9 @@ function App() {
           <Route path="/lab4" component={Lab4Container} />
           <Route path="/lab5" component={Lab5Container} />
           <Route path="/lab6" component={Lab6Container} />
+          <Route path="/lab7" component={Lab7Container} />
+          <Route path="/lab8" component={Lab8Container} />
+          <Route path="/lab9" component={Lab9Container} />
         </div>
       </div>
     </div>

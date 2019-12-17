@@ -2,9 +2,8 @@ import React, {useState} from 'react';
 import styles from './MatrixInput.module.css';
 
 const MatrixInput = props => {
-  let [vertexes, handleVertexes] = useState('');
-
   let {nodes, edges} = props.matrix;
+  let [vertexes, handleVertexes] = useState(nodes.join(' '));
 
   const onChangeVertexes = e => {
     let newValue = e.target.value;

@@ -19,21 +19,26 @@ const Lab6Result = ({graph}) => {
         matrix={adj.adjMatrix}
         nodes={adj.nodes}
         isOrgraph={false}
+        length={150}
       />
       <div className={styles.matrixesContainer}>
         <div className={styles.matrix}>
           <h4>Матрица смежности:</h4>
           <Matrix matrix={adj.adjMatrix} nodes={adj.nodes} />
         </div>
-        <div className={styles.matrix}>
+        {/*<div className={styles.matrix}>
           <h4>Матрица инцедентности:</h4>
           <Matrix matrix={inc} nodes={graph.nodes} isInc={true} />
-        </div>
+  </div>*/}
       </div>
       {isGraphEuler ? (
         <div>
-          <p>Граф эйлеров</p>
-          <p>Эйлерова цепь: {EulerPath}</p>
+          {isGraphEuler == 1 ? (
+            <p>Граф полуэйлеров, следовательно существует эйлеров путь</p>
+          ) : (
+            <p>Граф эйлеров, следовательно существует эйлеров цикл</p>
+          )}
+          <p>Эйлерова цепь (путь): {EulerPath}</p>
         </div>
       ) : (
         <p>Граф не является ейлеровым</p>
