@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 import Lab9 from './Lab9';
+import {test} from './test';
+import {test2} from './test2';
 
 const Lab9Container = () => {
   const [hideOutput, showResult] = useState(true);
-  const [AdjMatrix, changeMatrix] = useState({nodes: [], edges: []});
+  const [AdjMatrix, changeMatrix] = useState(test);
 
   const ChangeAdjacency = node => {
     changeMatrix({
